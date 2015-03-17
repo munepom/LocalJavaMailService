@@ -1,0 +1,71 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+
+mainClassName = ''
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+compileJava.options.fork = true
+
+def defaultEncoding = 'UTF-8'
+[compileJava, compileTestJava]*.options*.encoding = defaultEncoding
+
+configurations {
+	provided
+}
+
+// tag::repositories[]
+repositories {
+	mavenCentral()
+}
+// end::repositories[]
+
+// tag::jar[]
+jar {
+	baseName = 'appmanager'
+	version =  '0.1.0'
+}
+// end::jar[]
+
+// tag::dependencies[]
+dependencies {
+	provided "org.projectlombok:lombok:1.16.2"
+
+	compile "org.slf4j:slf4j-api:1.7.7"
+	compile "ch.qos.logback:logback-classic:1.1.2"
+	compile "ch.qos.logback:logback-core:1.1.2"
+	compile "com.sun.mail:javax.mail:1.5.2"
+	compile 'com.google.apis:google-api-services-gmail:v1-rev19-1.19.1'
+	testCompile "junit:junit:4.11"
+}
+// end::dependencies[]
+
+sourceSets {
+	main.compileClasspath += configurations.provided
+	test {
+		compileClasspath += configurations.provided
+		runtimeClasspath += configurations.provided
+	}
+}
+
+eclipse {
+	classpath {
+		 plusConfigurations += [ configurations.provided ] //to use lombok
+		 containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+		 containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+	}
+}
+
+test {
+	systemProperties 'property': 'value'
+}
+
+uploadArchives {
+	repositories {
+	   flatDir {
+		   dirs 'repos'
+	   }
+	}
+}

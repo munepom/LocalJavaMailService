@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<!-- output to file-->
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/tmp/log/mailapp.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>/tmp/log/mailapp.%d{yyyyMMdd}.log</fileNamePattern>
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%date{MM/dd Hh:mm:ss:SSS} %-1level [%thread] %class{0} %log{0} %-5.5level %-20.20method %-4.4line %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- output to stdout -->
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/tmp/log/mailapp.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>/tmp/log/mailapp.%d{yyyyMMdd}.log</fileNamePattern>
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%date{MM/dd Hh:mm:ss:SSS} %-1level [%thread] %class{0} %log{0} %-5.5level %-20.20method %-4.4line %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- set level -->
+	<root>
+		<!-- Setting log level
+		<level value="error" />
+		<level value="warn" />
+		<level value="info" />
+		<level value="debug" />
+		<level value="trace"/>
+		-->
+		<level value="trace" />
+		<!-- appender -->
+		<!--<appender-ref ref="FILE" /> -->
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>
