@@ -49,7 +49,7 @@ public class MailReader implements Function<Folder, List<Path>> {
 
 	Logger log = LoggerFactory.getLogger(getClass());
 
-	protected PropsSetMailServer propsSet;
+	protected MailServerProps propsSet;
 
 	protected Path appHomePath;
 	protected Path tmpPath;
@@ -63,7 +63,7 @@ public class MailReader implements Function<Folder, List<Path>> {
 	public MailReader() {
 	}
 
-	public MailReader(PropsSetMailServer propsSet, Path appHomePath, Path tmpPath, Path failedPath, int folderOpenMode, boolean canDeleteMail, boolean isParallel) {
+	public MailReader(MailServerProps propsSet, Path appHomePath, Path tmpPath, Path failedPath, int folderOpenMode, boolean canDeleteMail, boolean isParallel) {
 		this.propsSet = propsSet;
 		this.appHomePath = appHomePath;
 		this.tmpPath = tmpPath;

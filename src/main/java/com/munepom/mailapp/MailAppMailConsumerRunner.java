@@ -31,11 +31,11 @@ public class MailAppMailConsumerRunner extends AbstractMailAppRunner implements 
 		super();
 	}
 
-	public MailAppMailConsumerRunner(String threadName, boolean daemon, BlockingQueue<Path> queue, PropsSetMailServer propsSet, Address[] errorFrom, boolean isParallel) {
+	public MailAppMailConsumerRunner(String threadName, boolean daemon, BlockingQueue<Path> queue, MailServerProps propsSet, Address[] errorFrom, boolean isParallel) {
 		super(threadName, daemon, queue, propsSet, errorFrom, isParallel);
 	}
 
-	public MailAppMailConsumerRunner(String threadName, boolean daemon, BlockingQueue<Path> queue, PropsSetMailServer propsSet, Address[] errorFrom, boolean isParallel, MailConsumer consumer, int consumerThreadNum) {
+	public MailAppMailConsumerRunner(String threadName, boolean daemon, BlockingQueue<Path> queue, MailServerProps propsSet, Address[] errorFrom, boolean isParallel, MailConsumer consumer, int consumerThreadNum) {
 		super(threadName, daemon, queue, propsSet, errorFrom, isParallel);
 		this.consumer = consumer;
 		this.consumerThreadNum = consumerThreadNum;

@@ -40,7 +40,7 @@ public class MailAppMailServerRunner extends AbstractMailAppRunner {
 		super();
 	}
 
-	public MailAppMailServerRunner(String threadName, boolean daemon, BlockingQueue<Path> queue, PropsSetMailServer propsSet, Address[] errorFrom, boolean isParallel, MailReader reader, long span) {
+	public MailAppMailServerRunner(String threadName, boolean daemon, BlockingQueue<Path> queue, MailServerProps propsSet, Address[] errorFrom, boolean isParallel, MailReader reader, long span) {
 		super(threadName, daemon, queue, propsSet, errorFrom, isParallel);
 		this.reader = reader;
 		this.span = span;

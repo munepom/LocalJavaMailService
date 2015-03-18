@@ -7,7 +7,7 @@ import lombok.Data;
 
 @SuppressWarnings("serial")
 @Data
-public class PropsSetMailServer implements Serializable {
+public class MailServerProps implements Serializable {
 
 	/**
 	 * メール読み出し用プロパティ
@@ -39,11 +39,11 @@ public class PropsSetMailServer implements Serializable {
 	 */
 	private String mbox = "INBOX";
 
-	public PropsSetMailServer(){
+	public MailServerProps(){
 
 	}
 
-	public PropsSetMailServer(Properties mailProps, String host, String user, String password, String protocol, String mbox) {
+	public MailServerProps(Properties mailProps, String host, String user, String password, String protocol, String mbox) {
 		this.mailProps = mailProps;
 		this.host = host;
 		this.user = user;

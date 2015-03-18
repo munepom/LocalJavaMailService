@@ -15,7 +15,7 @@ import lombok.Data;
 @Data
 public abstract class MailConsumer implements Runnable, Consumer<Path> {
 
-	protected PropsSetMailServer propsSet;
+	protected MailServerProps propsSet;
 
 	protected Path appHomePath;
 	protected Path tmpPath;
@@ -30,7 +30,7 @@ public abstract class MailConsumer implements Runnable, Consumer<Path> {
 		// do nothing
 	}
 
-	public MailConsumer(PropsSetMailServer propsSet, Path appHomePath, Path tmpPath, Path failedPath) {
+	public MailConsumer(MailServerProps propsSet, Path appHomePath, Path tmpPath, Path failedPath) {
 		super();
 		this.propsSet = propsSet;
 		this.appHomePath = appHomePath;

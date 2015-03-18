@@ -17,9 +17,7 @@ import com.munepom.appmanager.ApplicationInstanceListener;
  * @author nishimura
  *
  */
-public abstract class AbstractMailAppRunner implements Runnable, ApplicationInstanceListener {
-
-	protected Logger log = LoggerFactory.getLogger( this.getClass() );
+public abstract class MailApp implements Runnable, ApplicationInstanceListener {
 
 	protected boolean isRunnable = true;
 
@@ -35,11 +33,11 @@ public abstract class AbstractMailAppRunner implements Runnable, ApplicationInst
 
 	protected BlockingQueue<Path> queue;
 
-	public AbstractMailAppRunner(){
+	public MailApp(){
 		super();
 	}
 
-	public AbstractMailAppRunner(String threadName, boolean daemon, BlockingQueue<Path> queue, MailServerProps propsSet, Address[] errorFrom, boolean isParallel) {
+	public MailApp(String threadName, boolean daemon, BlockingQueue<Path> queue, MailServerProps propsSet, Address[] errorFrom, boolean isParallel) {
 		super();
 		this.threadName = threadName;
 		this.daemon = daemon;

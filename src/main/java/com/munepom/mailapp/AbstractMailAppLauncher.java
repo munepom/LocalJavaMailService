@@ -2,6 +2,7 @@ package com.munepom.mailapp;
 
 
 import java.nio.file.Path;
+import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -13,6 +14,13 @@ import org.slf4j.LoggerFactory;
 import com.munepom.appmanager.ApplicationInstanceManager;
 import com.munepom.appmanager.ApplicationInstanceProps;
 
+/**
+ *
+ * メールアプリ起動用クラス
+ *
+ * @author nishimura
+ *
+ */
 public abstract class AbstractMailAppLauncher implements ApplicationInstanceProps {
 
 	private Logger log = LoggerFactory.getLogger( this.getClass() );
@@ -20,7 +28,7 @@ public abstract class AbstractMailAppLauncher implements ApplicationInstanceProp
 	/**
 	 * メール読み出し用設定
 	 */
-	protected PropsSetMailServer propsSet;
+	protected MailServerProps propsSet;
 
 	/**
 	 * エラーメッセージ from (javax.mail.Address は Serializable ではないので、固定値設定)
@@ -63,7 +71,7 @@ public abstract class AbstractMailAppLauncher implements ApplicationInstanceProp
 	protected Path failedPath;
 
 	/**
-	 * メール処理実行クラス
+	 * メール読み出し実行クラス
 	 */
 	protected MailReader reader;
 
@@ -72,25 +80,30 @@ public abstract class AbstractMailAppLauncher implements ApplicationInstanceProp
 	 */
 	protected MailConsumer consumer;
 
+	/**
+	 * 並列読取りモード
+	 */
 	protected boolean isParallelRead = false;
+
+	/**
+	 * 並列処理モード
+	 */
 	protected boolean isParallelConsumer = false;
 
+	/**
+	 * メール処理スレッド数
+	 */
 	protected int consumerThreadNum = 1;
 
+	/**
+	 * メール蓄積 Queue
+	 */
 	private BlockingQueue<Path> queue = new LinkedBlockingQueue<>();
 
 	/**
 	 * メール読み取り間隔 (ミリ秒)
 	 */
 	protected long span = 10000L;
-
-	/**
-	 * Queue を初期化します
-	 */
-	public AbstractMailAppLauncher() {
-		super();
-		queue = new LinkedBlockingQueue<>();
-	}
 
 //	public boolean init() {
 //		try {
@@ -116,6 +129,9 @@ public abstract class AbstractMailAppLauncher implements ApplicationInstanceProp
 //			log.warn("コマンドまたは設定を見直してください");
 //			return;
 //		}
+		if (Objects.isNull(queue)) {
+			queue = new LinkedBlockingQueue<>();
+		}
 
 		//Runner instance (処理実行) 作成
 		MailAppMailServerRunner runnerMailServer = new MailAppMailServerRunner(threadNameMailServer, false, queue, propsSet, errorFrom, isParallelRead, reader, span);
